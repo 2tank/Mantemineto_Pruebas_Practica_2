@@ -1,5 +1,5 @@
-package org.mps.deque;
-
+package mps;
+  
 /**
  * Class representing a node of a double-ended queue (deque). Each node has references to
  * the next and previous nodes.
@@ -17,7 +17,7 @@ class LinkedNode<T> {
         this.previous = previous;
         this.next = next;
     }
-
+ 
     T getItem() {
         return item;
     }
@@ -54,3 +54,4 @@ class LinkedNode<T> {
         return !(isFirstNode() || isLastNode());
     }
 }
+ 
