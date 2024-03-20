@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	
+
 	<!--Informacion del proyecto -->
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.example</groupId>
 	<artifactId>mockito-mps-uma</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	
+
 	<!--Propiedades del proyecto y maven-->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -29,14 +29,14 @@
 
 	<!--Dependencias de Maven -->
 	<dependencies>
-	<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-    		<groupId>org.mockito</groupId>
+			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
 			<version>5.7.0</version>
 			<scope>test</scope>
@@ -48,7 +48,7 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-	
+
 	<!-- Los plugins son extensiones de maven (objetivos) que se ejecutan durante la fase de build o reporting-->
 	<!--
 		- El Plugin Surefire se utiliza para ejecutar los tests de la aplicacion. 
@@ -78,6 +78,14 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>8</source>
+					<target>8</target>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
