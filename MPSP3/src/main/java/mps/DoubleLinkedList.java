@@ -103,25 +103,58 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     @Override
     public T get(int index) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+
+        LinkedNode<T> aux = this.first;
+        int auxNumber = 1;
+
+        if(index <= 0 ){
+            throw new DoubleLinkedQueueException("Se ha intentado obtener un elemento con un indice incorrecto");
+        }
+
+        while(aux != null && auxNumber < index){
+
+            auxNumber++;
+            aux = aux.getNext();
+        }
+        if(aux == null){
+            throw new DoubleLinkedQueueException("Se ha intentado obtener un elemento que no existe en la lista");
+        }
+        return aux.getItem();
     }
 
     @Override
     public boolean contains(T value) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'contains'");
+
+        LinkedNode<T> aux = this.first;
+
+        while(aux != null && aux.getItem() != value){
+
+            aux = aux.getNext();
+        }
+       return (aux != null);
     }
 
     @Override
     public void remove(T value) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+
+        LinkedNode<T> aux = this.first;
+        LinkedNode<T> preAux = null;
+
+        while(aux != null && aux.getItem() != value){
+
+            preAux = aux;
+            aux = aux.getNext();
+
+        }
+        if(aux == null){
+         throw new DoubleLinkedQueueException("Se ha intentado eliminar un elemento que no existe en la lista");
+        }
+        preAux.setNext(aux.getNext());
+        aux.getNext().setPrevious(preAux);
     }
 
     @Override
     public void sort(Comparator<? super T> comparator) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sort'");
+
     }
 }
