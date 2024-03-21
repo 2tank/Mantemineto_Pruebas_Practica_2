@@ -46,29 +46,56 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     @Override
     public void deleteFirst() {
-        // TODO
+
+        if(this.first != null){
+            if(this.first == this.last){
+                this.last = null;
+            }
+            this.first = this.first.getNext();
+        }else{
+            throw new DoubleLinkedQueueException("se ha intentado eliminar el primer elemento con la lista vacia");
+        }
     }
 
     @Override
     public void deleteLast() {
-        // TODO
+
+        if(this.last != null){
+            if(this.first == this.last){
+                this.first = null;
+            }
+            this.last = this.last.getPrevious();
+        }else{
+            throw new DoubleLinkedQueueException("se ha intentado eliminar el ultimo elemento con la lista vacia");
+        }
     }
 
     @Override
     public T first() {
-        // TODO
-        return null;
+
+        if(this.first == null){
+            throw new DoubleLinkedQueueException("se ha intentado obtener el primer elemento con la lista vacia");
+        }
+        return this.first.getItem();
     }
 
     @Override
     public T last() {
-        // TODO
-        return null;
+        if(this.last == null){
+            throw new DoubleLinkedQueueException("se ha intentado obtener el ultimo elemento con la lista vacia");
+        }
+        return this.last.getItem();
     }
 
     @Override
     public int size() {
-        // TODO
-        return 0;
+
+        LinkedNode<T> aux = this.first;
+        int tam = 0;
+        while(aux != null){
+            tam++;
+            aux = aux.getNext();
+        }
+        return tam;
     }
 }
