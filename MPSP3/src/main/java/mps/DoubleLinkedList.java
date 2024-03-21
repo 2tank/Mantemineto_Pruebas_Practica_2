@@ -1,5 +1,7 @@
 package mps;
 
+import java.util.Comparator;
+
 public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     private LinkedNode<T> first;
@@ -97,5 +99,64 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
             aux = aux.getNext();
         }
         return tam;
+    }
+
+    @Override
+    public T get(int index) {
+
+        LinkedNode<T> aux = this.first;
+        int auxNumber = 1;
+
+        if(index <= 0 ){
+            throw new DoubleLinkedQueueException("Se ha intentado obtener un elemento con un indice incorrecto");
+        }
+
+        while(aux != null && auxNumber < index){
+
+            auxNumber++;
+            aux = aux.getNext();
+        }
+        if(aux == null){
+            throw new DoubleLinkedQueueException("Se ha intentado obtener un elemento que no existe en la lista");
+        }
+        return aux.getItem();
+    }
+
+    @Override
+    public boolean contains(T value) {
+
+        LinkedNode<T> aux = this.first;
+
+        while(aux != null && aux.getItem() != value){
+
+            aux = aux.getNext();
+        }
+       return (aux != null);
+    }
+
+    @Override
+    public void remove(T value) {
+
+        LinkedNode<T> aux = this.first;
+        LinkedNode<T> preAux = null;
+
+        while(aux != null && aux.getItem() != value){
+
+            preAux = aux;
+            aux = aux.getNext();
+
+        }
+        if(aux == null){
+         throw new DoubleLinkedQueueException("Se ha intentado eliminar un elemento que no existe en la lista");
+        }
+        preAux.setNext(aux.getNext());
+        aux.getNext().setPrevious(preAux);
+    }
+
+    @Override
+    public void sort(Comparator<? super T> comparator) {
+
+
+
     }
 }
