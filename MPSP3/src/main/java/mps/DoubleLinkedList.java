@@ -1,5 +1,7 @@
 package mps;
 
+import java.util.Comparator;
+
 public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     private LinkedNode<T> first;
@@ -7,7 +9,6 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
     private int size;
 
     public DoubleLinkedList() {
-
         this.first = null;
         this.last = null;
     }
@@ -33,6 +34,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
         LinkedNode<T> nodeAux = new LinkedNode<>(value,null,null);
         nodeAux.setItem(value);
+        
         if(this.last==null){
             this.first = nodeAux;
             this.last = nodeAux;
@@ -97,5 +99,29 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
             aux = aux.getNext();
         }
         return tam;
+    }
+
+    @Override
+    public T get(int index) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'get'");
+    }
+
+    @Override
+    public boolean contains(T value) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'contains'");
+    }
+
+    @Override
+    public void remove(T value) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+    }
+
+    @Override
+    public void sort(Comparator<? super T> comparator) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'sort'");
     }
 }

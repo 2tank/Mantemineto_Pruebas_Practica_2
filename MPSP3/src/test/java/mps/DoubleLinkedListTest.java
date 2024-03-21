@@ -4,9 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.*;
-
-import java.beans.Transient;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DoubleLinkedListTest {
@@ -21,58 +18,68 @@ public class DoubleLinkedListTest {
         void createNewDoubleLinkedList(){
             list = new DoubleLinkedList<>();
         }
+
         @Test
         @DisplayName("Anyadir un elemento al comienzo de la lista (hacer un prepend)")
-        void anyadirElementoAPrimeraPosicionConListaVacia(){
+        void prepend_newList_suceed(){
+            int value = 12;
+            Object expectedValue = 12;
 
-            list.prepend(12);
-            Object resultado = 12;
-            Object valorObtenido = list.first();
-            assertEquals(resultado,valorObtenido);
+            list.prepend(value);
+            Object returnValue = list.first();
+
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Anyadir un elemento al final de la lista (hacer un apend)")
-        void anyadirElementoAUltimaPosicionConListaVacia(){
+        void append_newList_suceed(){
+            int value = 12;
+            Object expectedValue = 12;
 
-            list.append(12);
-            Object resultado = 12;
-            Object valorObtenido = list.last();
-            assertEquals(resultado,valorObtenido);
+            list.append(value);
+            Object returnValue = list.last();
+
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Anyadir un elemento al comienzo de la lista debe ser igual que el elemento final")
-        void anyadirElementoAPrimeraPosicionIgualQueUltimaPosicion(){
+        void prepend_newList_lastEqualsFirst(){
+            int value = 12;
 
-            list.prepend(12);
+            list.prepend(value);
             Object valorObtenidoPrimeraPosicion = list.first();
             Object valorObtenidoUltimaPosicion = list.last();
+
             assertEquals(valorObtenidoUltimaPosicion,valorObtenidoPrimeraPosicion);
         }
 
         @Test
         @DisplayName("Anyadir un elemento al final de la lista debe ser igual que el elemento primero")
-        void anyadirElementoAUltimaPosicionIgualQuePrimeraPosicion(){
+        void append_newList_lastEqualsFirst(){
+            int value = 12;
 
-            list.append(12);
+            list.append(value);
             Object valorObtenidoPrimeraPosicion = list.first();
             Object valorObtenidoUltimaPosicion = list.last();
+
             assertEquals(valorObtenidoUltimaPosicion,valorObtenidoPrimeraPosicion);
         }
 
         @Test
-        @DisplayName("Obtener tamanyo de la lista")
-        void obtenerTamanyoListaVacia(){
+        @DisplayName("Obtener tamanyo de la lista vacia devuelve 0")
+        void size_newList_returns0(){
+            int expectedValue = 0;
 
-            int resultado = 0;
-            int valorObtenido = list.size();
-            assertEquals(resultado,valorObtenido);
+            int returnValue = list.size();
+
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
-        @DisplayName("Eliminar el primer elemento de una lista vacia es incorrecto")
-        void eliminarPrimerElementoListaVacia(){
+        @DisplayName("Eliminar el primer elemento de una lista vacia lanza Excepcion")
+        void deleteFirst_newList_throwsRuntimeException(){
 
             assertThrows(RuntimeException.class,()->{
                 list.deleteFirst();
@@ -80,8 +87,8 @@ public class DoubleLinkedListTest {
         }
 
         @Test
-        @DisplayName("Eliminar el ultimo elemento de una lista vacia es incorrecto")
-        void eliminarUltimoElementoListaVacia(){
+        @DisplayName("Eliminar el ultimo elemento de una lista vacia lanza Excepcion")
+        void deleteLast_newList_throwsRuntimeException(){
 
             assertThrows(RuntimeException.class,()->{
                 list.deleteLast();
@@ -89,8 +96,8 @@ public class DoubleLinkedListTest {
         }
 
         @Test
-        @DisplayName("Acceder al primer elemento de una lista vacia es incorrecto")
-        void obtenerPrimerElementoListaVaciaEsIncorrecto(){
+        @DisplayName("Acceder al primer elemento de una lista vacia lanza Excepcion")
+        void first_newList_returnsFirst(){
 
             assertThrows(RuntimeException.class,()->{
                 list.first();
@@ -99,8 +106,8 @@ public class DoubleLinkedListTest {
         }
 
         @Test
-        @DisplayName("Acceder al ultimo elemento de una lista vacia es incorrecto")
-        void obtenerUltimoElementoListaVaciaEsIncorrecto(){
+        @DisplayName("Acceder al ultimo elemento de una lista vacia lanza Excepcion")
+        void last_newList_returnsLast(){
 
             assertThrows(RuntimeException.class,()->{
                 list.last();
@@ -111,7 +118,7 @@ public class DoubleLinkedListTest {
 
     @Nested
     @DisplayName("Cuando se crea la DoubleLinkedList y se añade un elemento")
-    class WhenNotNew{
+    class WhenNewWithOneElement{
 
         @BeforeEach
         void createNewDoubleLinkedList(){
@@ -121,94 +128,108 @@ public class DoubleLinkedListTest {
 
         @Test
         @DisplayName("Se anyade un elemento en la primera posicion habiendo ya uno en la lista")
-        void anyadirElementoAPrimeraPosicionListaNoVacia(){
+        void prepend_newWithOneElement_insertSuceed(){
+            int value = 11;
+            Object expectedValue = 11;
 
-            list.prepend(11);
-            Object resultado = 11;
-            Object valorObtenido = list.first();
-            assertEquals(resultado,valorObtenido);
+            list.prepend(value);
+            Object returnValue = list.first();
+
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Comrpobar que al introducir un elemento en la primera posicion habiendo ya uno en la lista, el que ya habia pasa a ser el ultimo elemento")
-        void comprobarDesplazamientoDeElementoEnListaAlAnyadirPrepend(){
+        void prepend_newWithOneElement_firstTurnsLast(){
+            int value = 11;
+            Object expectedValue = 12;
 
-            list.prepend(11);
-            Object resultado = 12;
-            Object valorObtenido = list.last();
-            assertEquals(resultado,valorObtenido);
+            list.prepend(value);
+            Object returnValue = list.last();
+
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Se anyade un elemento en la ultima posicion habiendo ya uno en la lista")
-        void anyadirElementoAUltimaPosicionListaNoVacia(){
+        void append_newWithOneElement_insertSuceed(){
+            int value = 11;
+            Object expectedValue = 11;
 
-            list.append(11);
-            Object resultado = 11;
-            Object valorObtenido = list.last();
-            assertEquals(resultado,valorObtenido);
+            list.append(value);
+            Object returnValue = list.last();
+            
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Comrpobar que al introducir un elemento en la ultima posicion habiendo ya uno en la lista, el que ya habia pasa a ser el primer elemento")
-        void comprobarDesplazamientoDeElementoEnListaAlAnyadirAppend(){
+        void append_newWithOneElement_lastTurnsFirst(){
+            int value = 11;
+            Object expectedValue = 12;
 
-            list.append(11);
-            Object resultado = 12;
-            Object valorObtenido = list.first();
-            assertEquals(resultado,valorObtenido);
+            list.append(value);
+            Object returnValue = list.first();
+
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Eliminar primer elemento de una lista de un elemento")
-        void eliminarPrimerElementoDeUnaListaDeUnElemento(){
+        void deleteFirst_newWithOneElement_sizeTurns0(){
+            int expectedValue = 0;
 
             list.deleteFirst();
-            int resultado = 0;
-            int valorObtenido = list.size();
-            assertEquals(resultado,valorObtenido);
+            int returnValue = list.size();
+        
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Eliminar primer elemento de una lista tras haber añadido uno en la primera posicion")
-        void eliminarPrimerElementoDeUnaListaHabiendoAnyadidoUnoEnPrimeraPosicion(){
+        void deleteFirst_newWithOneElementAndPrepend_firstTurnsLast(){
+            int value = 11;
+            Object expectedValue = 12;
 
-            list.prepend(11);
+            list.prepend(value);
             list.deleteFirst();
-            Object resultado = 12;
-            Object valorObtenido = list.first();
-            assertEquals(resultado,valorObtenido);
+            Object returnValue = list.first();
+
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Eliminar ultimo elemento de una lista de un elemento")
-        void eliminarUltimoElementoDeUnaListaDeUnElemento(){
+        void deleteLast_newWithOneElement_sizeTurns0(){
+            int expectedValue = 0;
 
             list.deleteLast();
-            int resultado = 0;
-            int valorObtenido = list.size();
-            assertEquals(resultado,valorObtenido);
+            int returnValue = list.size();
+
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Eliminar ultimo elemento de una lista tras haber añadido uno en la ultima posicion")
-        void eliminarUltimoElementoDeUnaListaHabiendoAnyadidoUnoEnPrimeraPosicion(){
+        void deleteLast_newWithOneElementAndAppend_lastTurnsFirst(){
+            int value = 11;
+            Object expectedValue = 12;
 
-            list.append(11);
+            list.append(value);
             list.deleteLast();
-            Object resultado = 12;
-            Object valorObtenido = list.last();
-            assertEquals(resultado,valorObtenido);
+            Object returnValue = list.last();
+
+            assertEquals(expectedValue,returnValue);
         }
 
         @Test
         @DisplayName("Obtener el tamaño de una lista no vacia")
-        void obtenerElementoDeListaNoVacia(){
+        void size_newWithOneElement_returns1(){
+            int expectedValue = 1;
 
-            int resultado = 1;
-            int valorObtenido = list.size();
-            assertEquals(resultado,valorObtenido);
+            int returnValue = list.size();
 
+            assertEquals(expectedValue,returnValue);
         }
     }
 
