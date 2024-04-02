@@ -107,7 +107,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         LinkedNode<T> aux = this.first;
         int auxNumber = 1;
 
-        if(index <= 0 ){
+        if(index <= 0 || this.first == null){
             throw new DoubleLinkedQueueException("Se ha intentado obtener un elemento con un indice incorrecto");
         }
 
@@ -127,6 +127,10 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
         LinkedNode<T> aux = this.first;
 
+        if(aux == null){
+            throw new DoubleLinkedQueueException("Se ha intentado comprobar un elemento en la lista estando vacia");
+        }
+
         while(aux != null && aux.getItem() != value){
 
             aux = aux.getNext();
@@ -140,6 +144,12 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         LinkedNode<T> aux = this.first;
         LinkedNode<T> preAux = null;
 
+        if(aux == null){
+
+            throw new DoubleLinkedQueueException("Se ha intentado eliminar un elemento de la lista estando vacia");
+
+        }
+
         while(aux != null && aux.getItem() != value){
 
             preAux = aux;
@@ -149,12 +159,44 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         if(aux == null){
          throw new DoubleLinkedQueueException("Se ha intentado eliminar un elemento que no existe en la lista");
         }
-        preAux.setNext(aux.getNext());
-        aux.getNext().setPrevious(preAux);
+        if(preAux != null){
+            if(aux.getNext() != null){
+                preAux.setNext(aux.getNext());
+                aux.getNext().setPrevious(preAux);
+            }else{
+                this.last = preAux;
+                this.last.setNext(null);
+                if(this.first==this.last){
+                    this.first.setNext(null);
+                }
+            }
+        }else{
+            this.first = aux.getNext();
+        }
+
     }
 
     @Override
     public void sort(Comparator<? super T> comparator) {
-
+        int n = size();
+        if(n==0){
+            throw new DoubleLinkedQueueException("Se ha intentado ordenar una lista vacia");
+        }
+        boolean swapped;
+        do {
+            swapped = false;
+            LinkedNode<T> current = first;
+            while (current != null && current.getNext() != null) {
+                if (comparator.compare(current.getItem(), current.getNext().getItem()) > 0) {
+                    // Intercambiar los elementos si están en el orden incorrecto
+                    T temp = current.getItem();
+                    current.setItem(current.getNext().getItem());
+                    current.getNext().setItem(temp);
+                    swapped = true;
+                }
+                current = current.getNext();
+            }
+        } while (swapped);
     }
+
 }

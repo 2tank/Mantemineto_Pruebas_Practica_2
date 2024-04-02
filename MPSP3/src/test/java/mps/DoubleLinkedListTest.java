@@ -1,9 +1,15 @@
+//mvn jacoco:prepare-agent test install jacoco:report
+
 package mps;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+
+import java.util.Comparator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class DoubleLinkedListTest {
@@ -111,6 +117,71 @@ public class DoubleLinkedListTest {
 
             assertThrows(RuntimeException.class,()->{
                 list.last();
+            });
+
+        }
+
+        ///////////// TESTS SEGUNDA PARTE DE LA PRACTICA /////////////
+        @Test
+        @DisplayName("Obtener un elemento mediante un índice de una lista vacia lanza Excepcion")
+        void getElement_newList_returnException(){
+
+            int index = 1;
+
+            assertThrows(RuntimeException.class,()->{
+                list.get(index);
+            });
+        }
+
+        @Test
+        @DisplayName("Obtener un elemento mediante un índice menor o igual a cero en una lista lanza Exepcion")
+        void getElementLowerIndex_newList_returnException(){
+
+            int index = 0;
+
+            assertThrows(RuntimeException.class,()->{
+                list.get(index);
+            });
+        }
+
+        @Test
+        @DisplayName("Comprobar si un elemento está contenido en una lista vacia lanza Excepcion")
+        void containsElement_newList_returnException(){
+
+            Integer value = 13;
+
+            assertThrows(RuntimeException.class,()->{
+                list.contains(value);
+            });
+        }
+
+        @Test
+        @DisplayName("Eliminar un elemento en una lista vacia lanza Excepcion")
+        void removeElement_newList_returnException(){
+
+            Integer value = 13;
+
+            assertThrows(RuntimeException.class,()->{
+                list.remove(value);
+            });
+        }
+
+        @Test
+        @DisplayName("Ordenar una lista vacia lanza Excepcion")
+        void sortList_newList_returnException(){
+
+            Comparator<? super Object> comparator = new Comparator<Object>() {
+                @Override
+                public int compare(Object o1, Object o2) {
+
+                    Integer i1 = (Integer) o1;
+                    Integer i2 = (Integer) o2;
+                    return i1.compareTo(i2);
+                }
+            };
+
+            assertThrows(RuntimeException.class,()->{
+                list.sort(comparator);
             });
 
         }
@@ -231,7 +302,160 @@ public class DoubleLinkedListTest {
 
             assertEquals(expectedValue,returnValue);
         }
+
+        ///////////// TESTS SEGUNDA PARTE DE LA PRACTICA /////////////
+
+        @Test
+        @DisplayName("Obtener correctamente un elemento existente mediante su indice en una lista no vacia")
+        void getElement_newWithOneElement_returnsTrue(){
+
+            int index = 1;
+            Object resultado = 12;
+            Object valorObtenido = list.get(1);
+            assertEquals(resultado,valorObtenido);
+
+        }
+
+        @Test
+        @DisplayName("Obtener correctamente un elemento existente mediante su indice en una lista no vacia no modifica la misma")
+        void getElement_newWithOneElementDoNotModifyTheList_returnsTrue(){
+
+            int index = 1;
+            Object resultado = 12;
+            Object valorObtenido = list.get(1);
+            int resultadoLon = 1;
+            int valorObtenidoLon = list.size();
+
+            assertEquals(resultadoLon,valorObtenidoLon);
+        }
+
+        @Test
+        @DisplayName("Comprobar si un elemento que esta contenido en una lista no vacia devuelve True")
+        void containElement_newWithOneElement_returnsTrue(){
+
+            Object resultado = 12;
+            boolean valorObtenido = list.contains(resultado);
+
+            assertTrue(valorObtenido);
+        }
+
+        @Test
+        @DisplayName("Comprobar si un elemento que no esta contenido en una lista no vacia devuelve False")
+        void notContainElement_newWithOneElement_returnsFalse(){
+
+            Object resultado = 13;
+            boolean valorObtenido = list.contains(resultado);
+
+            assertFalse(valorObtenido);
+        }
+        //VER NOTACION
+        @Test
+        @DisplayName("Eliminar elemento existente en una lista no vacia es correcto")
+        void removeElement_newWithOneElement_isCorrect(){
+
+            Object valorAEliminar = 12;
+            list.remove(valorAEliminar);
+
+            assertThrows(RuntimeException.class,()->{
+                list.get(1);
+            });
+
+        }
+        //VER NOTACION
+        @Test
+        @DisplayName("Eliminar elemento existente en una lista no vacia hace que la lista quede vacia")
+        void removeElement_newWithOneElement_isEmptyList(){
+
+            Object valorAEliminar = 12;
+            list.remove(valorAEliminar);
+            int resultado = 0;
+            int valorObtenido = list.size();
+            assertEquals(resultado,valorObtenido);
+        }
+
+        //VER NOTACION
+        @Test
+        @DisplayName("Eliminar elemento existente en una lista no vacia hace que la lista quede vacia y que no se puedan eliminar mas elementos")
+        void removeElement_newWithOneElement_notDennyRemove(){
+
+            Object valorAEliminar = 12;
+            list.remove(valorAEliminar);
+
+            assertThrows(RuntimeException.class,()->{
+                list.remove(13);
+            });
+
+        }
+
+        @Test
+        @DisplayName("Eliminar elemento inexistente en una lista no vacia es incorrecto")
+        void removeNonexistentElement_newWithOneElement_returnException(){
+
+            Object valorAEliminar = 16;
+
+
+            assertThrows(RuntimeException.class,()->{
+                list.remove(valorAEliminar);
+            });
+
+        }
     }
 
+    @Nested
+    @DisplayName("Cuando se crea la DoubleLinkedList y se añaden dos elementos")
+    class WhenNewWithTwoElement {
 
+        @BeforeEach
+        void createNewDoubleLinkedList(){
+            list = new DoubleLinkedList<>();
+            list.append(12);
+            list.append(5);
+        }
+
+        ///////////// TESTS SEGUNDA PARTE DE LA PRACTICA /////////////
+        @Test
+        @DisplayName("Obtener correctamente un elemento existente mediante su indice en una lista no vacia con dos elementos")
+        void getElement_newWithTwoElement_returnsTrue(){
+
+            int index = 2;
+            Object resultado = 5;
+            Object valorObtenido = list.get(2);
+            assertEquals(resultado,valorObtenido);
+
+        }
+
+        @Test
+        @DisplayName("Obtener un elemento mediante un indice erroneo para una lista no vacia con dos elementos lanza Excepcion")
+        void getElementSuperiorIndex_newWithTwoElement_returnsExcepcion(){
+
+            int index = 3;
+
+            assertThrows(RuntimeException.class,()->{
+                list.get(index);
+            });
+        }
+
+        @Test
+        @DisplayName("Comprobar si un elemento que esta contenido en una lista doblemente devuelve True")
+        void containDuplicateElement_newWithTwoElement_returnsTrue(){
+
+            Object valor = 5;
+            list.append(valor);
+            boolean valorObtenido = list.contains(valor);
+            assertTrue(valorObtenido);
+        }
+
+        @Test
+        @DisplayName("Eliminar elemento existente en una lista con dos elementos es correcto")
+        void removeElement_newWithTwoElement_isCorrect(){
+
+            Object valorAEliminar = 5;
+            list.remove(valorAEliminar);
+
+            assertThrows(RuntimeException.class,()->{
+                list.get(2);
+            });
+
+        }
+    }
 }
