@@ -7,6 +7,9 @@ package mps;
  *
  * @param <T> the type of elements held in the deque.
  */
+
+//@author Pablo Márquez Benítez, Adrián Fernandez Vera
+
 class LinkedNode<T> {
     private T item;
     private LinkedNode<T> previous;

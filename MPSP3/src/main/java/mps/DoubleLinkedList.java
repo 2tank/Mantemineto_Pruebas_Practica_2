@@ -2,6 +2,8 @@ package mps;
 
 import java.util.Comparator;
 
+//@author Pablo Márquez Benítez, Adrián Fernandez Vera
+
 public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     private LinkedNode<T> first;

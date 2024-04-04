@@ -7,6 +7,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+//@author Pablo Márquez Benítez, Adrián Fernandez Vera
+
 public class NodeLinkedTest {
 
     LinkedNode<Integer> lnode;
