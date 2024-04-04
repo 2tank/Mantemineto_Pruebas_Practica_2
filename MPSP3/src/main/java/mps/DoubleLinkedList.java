@@ -6,7 +6,6 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
 
     private LinkedNode<T> first;
     private LinkedNode<T> last;
-    private int size;
 
     public DoubleLinkedList() {
         this.first = null;
@@ -186,7 +185,7 @@ public class DoubleLinkedList<T> implements DoubleLinkedQueue<T> {
         do {
             swapped = false;
             LinkedNode<T> current = first;
-            while (current != null && current.getNext() != null) {
+            while (current.getNext() != null) {
                 if (comparator.compare(current.getItem(), current.getNext().getItem()) > 0) {
                     // Intercambiar los elementos si están en el orden incorrecto
                     T temp = current.getItem();

@@ -1,5 +1,4 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-mockito-mps-uma,mps,Main,75,0,0,0,17,0,2,0,2,0
 mockito-mps-uma,mps,LinkedNode,0,57,0,8,0,17,0,14,0,10
-mockito-mps-uma,mps,DoubleLinkedList,48,286,11,49,13,82,7,35,0,12
+mockito-mps-uma,mps,DoubleLinkedList,0,329,0,58,0,101,0,41,0,12
 mockito-mps-uma,mps,DoubleLinkedQueueException,0,4,0,0,0,2,0,1,0,1
